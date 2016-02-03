@@ -24,6 +24,13 @@ RUN docker-php-ext-install iconv mcrypt \
 RUN sed -i 's/^user\s.*/user = root/' /usr/local/etc/php-fpm.conf
 RUN sed -i 's/^group\s.*/group = root/' /usr/local/etc/php-fpm.conf
 RUN sed -i 's/^listen\s.*/listen = \/var\/run\/php\/php5-fpm.sock\nlisten.mode = 0777/' /usr/local/etc/php-fpm.conf
+
+RUN sed -i 's/^user\s.*/user = root/' /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i 's/^group\s.*/group = root/' /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i 's/^listen\s.*/listen = \/var\/run\/php\/php5-fpm.sock\nlisten.mode = 0777/' /usr/local/etc/php-fpm.d/www.conf
+
+RUN rm /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/www.conf.default  /usr/local/etc/php-fpm.d/zz-docker.conf 
+
 RUN mkdir -p /var/run/php
 VOLUME /var/run/php
 
